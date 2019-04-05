@@ -1,0 +1,36 @@
+{
+  "name": "indigerd/yii2-scenarios",
+  "description": "Yii2 Validation Scanarios",
+  "keywords": ["data validation", "validators", "validation scenarios"],
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Alexander Stepanenko",
+      "email": "alex.stepanenko@gmail.com"
+    }
+  ],
+  "repositories":[
+    {
+      "type": "composer",
+      "url": "https://asset-packagist.org"
+    }
+  ],
+  "require": {
+    "php": ">=7.1.0",
+    "yiisoft/yii2": "^2.0.13"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "@stable"
+  },
+  "autoload": {
+    "psr-4": {
+      "indigerd\\scenarios\\": "src/scenarios"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "indigerd\\scenariostests\\": "tests/scenarios"
+    }
+  }
+}
