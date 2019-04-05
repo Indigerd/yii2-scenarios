@@ -2,6 +2,7 @@
 
 namespace indigerd\scenarios;
 
+use indigerd\scenarios\validation\validator\ValidatorInterface;
 use yii\base\Model;
 use yii\web\Request;
 use indigerd\scenarios\exception\ModelValidateException;
@@ -32,16 +33,24 @@ class Scenario
         }
     }
 
-    public function addValidationRule($attribute, $rule, array $params = []) : self
+    public function addValidationRule($attribute, $validator, array $params = []) : self
     {
         $attributes = is_array($attribute) ? $attribute : [$attribute];
         foreach ($attributes as $attributeName) {
-            if (!isset($this->attributes[$attributeName])) {
-                $this->attributes[$attributeName] = $this->validatorCollectionFactory->create();
+            if (!($validator instanceof ValidatorInterface)) {
+                $validator = $this->validatorFactory->create($validator, $params);
             }
-            $validator = $this->validatorFactory->create($rule, $params);
-            $this->attributes[$attributeName]->addValidator($validator);
+            $this->addValidator($attributeName, $validator);
         }
+        return $this;
+    }
+
+    public function addValidator($attribute, ValidatorInterface $validator) : self
+    {
+        if (!isset($this->attributes[$attribute])) {
+            $this->attributes[$attribute] = $this->validatorCollectionFactory->create();
+        }
+        $this->attributes[$attribute]->addValidator($validator);
         return $this;
     }
 

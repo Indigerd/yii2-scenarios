@@ -6,6 +6,8 @@ class IntegerValidator extends Validator
 {
     protected $pattern = '/^\s*[+-]?\d+\s*$/';
 
+    protected $message = 'Value must be an integer';
+
     protected function normalizeNumber($value) : string
     {
         $value = (string)$value;
@@ -24,10 +26,5 @@ class IntegerValidator extends Validator
             return false;
         }
         return true;
-    }
-
-    public function getMessage() : string
-    {
-        return 'Value must be an integer';
     }
 }
