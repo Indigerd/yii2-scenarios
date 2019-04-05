@@ -13,7 +13,7 @@ class ValidatorFactory
         'required' => RequiredValidator::class
     ];
 
-    public function create(string $validatorName, array $params) : Validator
+    public function create(string $validatorName, array $params = []) : Validator
     {
         if (!isset($this->validators[$validatorName])) {
             throw new \InvalidArgumentException("Validator $validatorName not supported");

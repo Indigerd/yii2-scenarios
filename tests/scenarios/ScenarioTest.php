@@ -13,5 +13,10 @@ use PHPUnit\Framework\TestCase;
 
 class ScenarioTest extends TestCase
 {
+    protected $scenario;
 
+    protected function setUp() : void
+    {
+        //$this->scenario = new Scenario();
+    }
 }
