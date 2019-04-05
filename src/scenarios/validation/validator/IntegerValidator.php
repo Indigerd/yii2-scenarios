@@ -2,7 +2,7 @@
 
 namespace indigerd\scenarios\validation\validator;
 
-class IntegerValidator extends Validator
+class IntegerValidator extends AbstractValidator
 {
     protected $pattern = '/^\s*[+-]?\d+\s*$/';
 

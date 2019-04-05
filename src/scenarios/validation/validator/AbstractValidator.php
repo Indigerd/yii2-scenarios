@@ -2,7 +2,7 @@
 
 namespace indigerd\scenarios\validation\validator;
 
-abstract class Validator implements ValidatorInterface
+abstract class AbstractValidator implements ValidatorInterface
 {
     protected $skipOnEmpty;
 

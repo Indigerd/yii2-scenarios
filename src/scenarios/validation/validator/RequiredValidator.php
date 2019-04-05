@@ -2,7 +2,7 @@
 
 namespace indigerd\scenarios\validation\validator;
 
-class RequiredValidator extends Validator
+class RequiredValidator extends AbstractValidator
 {
     protected $message = 'Value is required';
 

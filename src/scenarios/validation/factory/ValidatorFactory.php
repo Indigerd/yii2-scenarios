@@ -4,7 +4,7 @@ namespace indigerd\scenarios\validation\factory;
 
 use indigerd\scenarios\validation\validator\IntegerValidator;
 use indigerd\scenarios\validation\validator\RequiredValidator;
-use indigerd\scenarios\validation\validator\Validator;
+use indigerd\scenarios\validation\validator\ValidatorInterface;
 
 class ValidatorFactory
 {
@@ -13,7 +13,7 @@ class ValidatorFactory
         'required' => RequiredValidator::class
     ];
 
-    public function create(string $validatorName, array $params = []) : Validator
+    public function create(string $validatorName, array $params = []) : ValidatorInterface
     {
         if (!isset($this->validators[$validatorName])) {
             throw new \InvalidArgumentException("Validator $validatorName not supported");
