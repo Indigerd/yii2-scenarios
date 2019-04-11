@@ -1,28 +1,29 @@
 <?php
 
-namespace indigerd\scenarios\behaviors;
+namespace indigerd\scenarios\filters;
 
-use indigerd\scenarios\exception\RequestValidateException;
-use indigerd\scenarios\Scenario;
-use indigerd\scenarios\validation\factory\ValidatorCollectionFactory;
-use indigerd\scenarios\validation\factory\ValidatorFactory;
 use Yii;
 use yii\base\Action;
 use yii\base\ActionFilter;
 use yii\base\InvalidConfigException;
-use yii\web\BadRequestHttpException;
+use yii\web\Request;
+use yii\web\Response;
+use indigerd\scenarios\Scenario;
+use indigerd\scenarios\exception\RequestValidateException;
+use indigerd\scenarios\validation\factory\ValidatorCollectionFactory;
+use indigerd\scenarios\validation\factory\ValidatorFactory;
 
 class RequestFilter extends ActionFilter
 {
     public $filters = [];
 
     /**
-     * @var \yii\web\Request the current request. If not set, the `request` application component will be used.
+     * @var Request the current request. If not set, the `request` application component will be used.
      */
     public $request;
 
     /**
-     * @var \yii\web\Response the response to be sent. If not set, the `response` application component will be used.
+     * @var Response the response to be sent. If not set, the `response` application component will be used.
      */
     public $response;
 
@@ -93,7 +94,9 @@ class RequestFilter extends ActionFilter
                     ($this->request->getIsGet() ? 'query' : 'body')
                 );
             } catch (RequestValidateException $e) {
-                throw new BadRequestHttpException($e->getErrorCollection());
+                $this->response->data = $e->getErrorCollection();
+                $this->response->setStatusCode(422, 'Request validation failed');
+                return false;
             }
         }
         return true;
