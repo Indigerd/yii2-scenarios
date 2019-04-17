@@ -31,7 +31,6 @@ class RequestFilter extends ActionFilter
 
     public $validatorCollectionFactory;
 
-
     /**
      * {@inheritdoc}
      */
@@ -55,17 +54,17 @@ class RequestFilter extends ActionFilter
             }
             $scenario = '';
             $rules    = [];
-            if (is_string($filter)) {
+            if (\is_string($filter)) {
                 $scenario = $filter;
             }
-            if (is_array($filter)) {
+            if (\is_array($filter)) {
                 if (!isset($filter['class'])) {
                     throw new InvalidConfigException('Invalid request filters configuration');
                 }
                 $scenario = $filter['class'];
                 $rules = isset($filter['rules']) ? $filter['rules'] : [];
             }
-            if (!is_a($scenario, Scenario::class, true)) {
+            if (!\is_a($scenario, Scenario::class, true)) {
                 throw new InvalidConfigException('Invalid request filters configuration');
             }
 

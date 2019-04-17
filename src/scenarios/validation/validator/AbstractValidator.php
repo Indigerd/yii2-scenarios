@@ -4,15 +4,15 @@ namespace indigerd\scenarios\validation\validator;
 
 abstract class AbstractValidator implements ValidatorInterface
 {
-    protected $skipOnEmpty;
+    protected $skipOnEmpty = true;
 
-    protected $message;
+    protected $message = 'Validation failed';
 
     public function __construct(array $params = [])
     {
         foreach ($params as $name => $value) {
-            $accessor = 'set' . ucfirst($name);
-            if (method_exists($this, $accessor)) {
+            $accessor = 'set' . \ucfirst($name);
+            if (\method_exists($this, $accessor)) {
                 $this->$accessor($value);
             }
         }

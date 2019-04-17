@@ -26,7 +26,7 @@ class Scenario
         $this->validatorFactory = $validatorFactory;
         $this->validatorCollectionFactory = $validatorCollectionFactory;
         foreach ($validationRules as $rule) {
-            if (!is_array($rule) or sizeof($rule) < 2) {
+            if (!\is_array($rule) or \sizeof($rule) < 2) {
                 throw new \InvalidArgumentException('Invalid rule configuration');
             }
             $this->addValidationRule(...$rule);
@@ -35,7 +35,7 @@ class Scenario
 
     public function addValidationRule($attribute, $validator, array $params = []) : self
     {
-        $attributes = is_array($attribute) ? $attribute : [$attribute];
+        $attributes = \is_array($attribute) ? $attribute : [$attribute];
         foreach ($attributes as $attributeName) {
             if (!($validator instanceof ValidatorInterface)) {
                 $validator = $this->validatorFactory->create($validator, $params);
@@ -82,7 +82,7 @@ class Scenario
                 }
             }
         }
-        if (sizeof($errors) > 0) {
+        if (\sizeof($errors) > 0) {
             throw new RequestValidateException($request, $errors);
         }
         return true;
