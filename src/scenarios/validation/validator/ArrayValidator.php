@@ -19,11 +19,11 @@ class ArrayValidator extends AbstractValidator
 
     public function validate($value, array $context = []): bool
     {
+        if ($this->skipOnEmpty and ($value === [] or $value === null)) {
+            return true;
+        }
         if (!\is_array($value)) {
             return false;
-        }
-        if ($this->skipOnEmpty and $value === []) {
-            return true;
         }
         if ($this->size !== null and $this->size !== \sizeof($value)) {
             $this->message = 'Expected array size: ' . $this->size . '. Actual: ' . \sizeof($value);
