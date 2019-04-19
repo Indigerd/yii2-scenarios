@@ -22,6 +22,9 @@ class ArrayEachValidator extends ArrayValidator
 
     public function validate($value, array $context = []): bool
     {
+        if ($this->skipOnEmpty and empty($value)) {
+            return true;
+        }
         $valid = parent::validate($value, $context);
         if (!$valid) {
             return false;
