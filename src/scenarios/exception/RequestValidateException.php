@@ -32,4 +32,9 @@ class RequestValidateException extends \Exception
     {
         return $this->errorCollection;
     }
+
+    public function getFirstError(): string
+    {
+        return current($this->errorCollection)[0];
+    }
 }
