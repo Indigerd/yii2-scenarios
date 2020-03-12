@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace indigerd\scenarios\validation\validator;
 
@@ -44,7 +44,7 @@ class NumberValidator extends AbstractValidator
 
     public function validate($value, array $context = []): bool
     {
-        if ($this->skipOnEmpty and ($value === null || \trim($value) === '')) {
+        if ($this->skipOnEmpty and ($value === null || \trim((string)$value) === '')) {
             return true;
         }
         if (!\preg_match($this->pattern, $this->normalizeNumber($value))) {
