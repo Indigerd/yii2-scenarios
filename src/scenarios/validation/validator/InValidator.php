@@ -20,6 +20,7 @@ class InValidator extends AbstractValidator
                 'Invalid validSet property value. Value must be either array or \Closure or \Traversable'
             );
         }
+        $this->validSet = $value;
         return $this;
     }
 
